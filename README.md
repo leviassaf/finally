@@ -4,7 +4,11 @@ A visually stunning AI-powered trading workstation that streams live market data
 
 Built entirely by coding agents as a capstone project for an agentic AI coding course.
 
-## Features
+## Status
+
+🚧 **In development.** The market data component (GBM simulator + price cache) is complete — see [`planning/MARKET_DATA_SUMMARY.md`](planning/MARKET_DATA_SUMMARY.md). The remainder of the platform (portfolio, API, AI chat, frontend, Docker) is still being built per [`planning/PLAN.md`](planning/PLAN.md).
+
+## Features (target)
 
 - **Live price streaming** via SSE with green/red flash animations
 - **Simulated portfolio** — $10k virtual cash, market orders, instant fills
@@ -25,16 +29,21 @@ Single Docker container serving everything on port 8000:
 
 ## Quick Start
 
-```bash
-# Clone and configure
-cp .env.example .env
-# Add your OPENROUTER_API_KEY to .env
+The market data simulator runs today as a live terminal demo:
 
-# Run with Docker
+```bash
+cd backend
+uv sync
+uv run market_data_demo.py
+```
+
+Once the full app is containerized, it will run with:
+
+```bash
+cp .env.example .env          # add your OPENROUTER_API_KEY
 docker build -t finally .
 docker run -v finally-data:/app/db -p 8000:8000 --env-file .env finally
-
-# Open http://localhost:8000
+# open http://localhost:8000
 ```
 
 ## Environment Variables
@@ -49,12 +58,12 @@ docker run -v finally-data:/app/db -p 8000:8000 --env-file .env finally
 
 ```
 finally/
-├── frontend/    # Next.js static export
-├── backend/     # FastAPI uv project
+├── frontend/    # Next.js static export (planned)
+├── backend/     # FastAPI uv project (market data complete)
 ├── planning/    # Project documentation and agent contracts
-├── test/        # Playwright E2E tests
+├── test/        # Playwright E2E tests (planned)
 ├── db/          # SQLite volume mount (runtime)
-└── scripts/     # Start/stop helpers
+└── scripts/     # Start/stop helpers (planned)
 ```
 
 ## License
